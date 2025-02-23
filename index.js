@@ -1,6 +1,8 @@
-const express = require("express");
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+import express from "express";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());

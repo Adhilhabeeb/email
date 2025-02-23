@@ -1,10 +1,15 @@
 import express from "express";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import cors from "cors"; // ✅ Import CORS
 
 dotenv.config();
 
 const app = express();
+
+// ✅ Enable CORS (Allow localhost:5173)
+app.use(cors({ origin: "http://localhost:5173" }));
+
 app.use(express.json());
 
 app.post("/send-email", async (req, res) => {
@@ -29,10 +34,11 @@ app.post("/send-email", async (req, res) => {
         await transporter.sendMail(mailOptions);
         res.json({ message: "Email sent successfully!" });
     } catch (error) {
-        res.status(500).json({ error: "Failed to send email" });
+        res.status(500).json({ error: "Failed to send email", details: error.message });
     }
 });
 
+// ✅ Test route
 app.get("/", (req, res) => {
     res.send("Email Server is running...");
 });

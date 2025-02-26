@@ -8,7 +8,8 @@ dotenv.config();
 const app = express();
 
 // ✅ Enable CORS (Allow localhost:5173)
-app.use(cors());
+// app.use(cors());
+app.use(cors({ origin: "https://boatproj-fa315.web.app/" }));
 
 
 app.use(express.json());
